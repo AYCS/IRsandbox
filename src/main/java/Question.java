@@ -40,7 +40,11 @@ public class Question{
         this.title = json.getString("title");
         this.body = json.getString("body");
 
-        tokenize();
+        this.body = this.body.replaceAll("<code>(?s).*?</code>","");
+        this.body = this.body.replaceAll("<a href=(?s).*?</a>","LINKOFASITE");
+        this.body = this.body.replaceAll("\"http.*?\"","LINKOFASITE");
+
+//        tokenize();
     }
 
     public void tokenize(){
@@ -49,12 +53,12 @@ public class Question{
         PTBTokenizer<CoreLabel> tokenizer;
 
         tokenizer = new PTBTokenizer<CoreLabel>
-                            (new StringReader(this.title), new CoreLabelTokenFactory(), "");
+                            (new StringReader(this.title), new CoreLabelTokenFactory(), "untokenizable=noneKeep");
         while(tokenizer.hasNext())
             titleTokens.add(tokenizer.next().current());
 
         tokenizer = new PTBTokenizer<CoreLabel>
-                            (new StringReader(this.body), new CoreLabelTokenFactory(), "");
+                            (new StringReader(this.body), new CoreLabelTokenFactory(), "untokenizable=noneKeep");
         while(tokenizer.hasNext())
             bodyTokens.add(tokenizer.next().current());
     }
