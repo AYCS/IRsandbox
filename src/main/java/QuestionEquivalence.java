@@ -1,3 +1,7 @@
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.process.CoreLabelTokenFactory;
+import edu.stanford.nlp.process.PTBTokenizer;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,26 +23,21 @@ public class QuestionEquivalence {
 
     public void readQuestions() throws IOException {
 
+        // Reads questions of 'AskUbuntu'.
         askUbuntuQuestionList = new ArrayList<Question>();
-
         File[] listOfFiles = (new File(ASKUBUNTU_DATA_PATH)).listFiles();
-        for(File file : (listOfFiles != null ? listOfFiles : new File[]{})){
+        for(File file : (listOfFiles != null ? listOfFiles : new File[]{}))
+            askUbuntuQuestionList.add(new Question((new BufferedReader(new FileReader(file))).readLine()));
 
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String questionJSON = br.readLine();
-
-            Question question = new Question(questionJSON);
-
-            System.out.println(question.getTitle());
-        }
+        // Reads questions of 'English'.
+        englishQuestionList = new ArrayList<Question>();
+        listOfFiles = (new File(ENGLISH_DATA_PATH)).listFiles();
+        for(File file : (listOfFiles != null ? listOfFiles : new File[]{}))
+            englishQuestionList.add(new Question((new BufferedReader(new FileReader(file))).readLine()));
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
 
-        try {
-            QuestionEquivalence qe = new QuestionEquivalence();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        QuestionEquivalence qe = new QuestionEquivalence();
     }
 }
