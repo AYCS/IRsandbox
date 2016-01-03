@@ -25,14 +25,18 @@ public class QuestionEquivalence {
         // Reads questions of 'AskUbuntu'.
         askUbuntuQuestionList = new ArrayList<Question>();
         File[] listOfFiles = (new File(ASKUBUNTU_DATA_PATH)).listFiles();
-        for(File file : (listOfFiles != null ? listOfFiles : new File[]{}))
+        for(File file : (listOfFiles != null ? listOfFiles : new File[]{})){
+            if(!file.getName().endsWith(".txt")) continue;
             askUbuntuQuestionList.add(new Question((new BufferedReader(new FileReader(file))).readLine()));
+        }
 
         // Reads questions of 'English'.
         englishQuestionList = new ArrayList<Question>();
         listOfFiles = (new File(ENGLISH_DATA_PATH)).listFiles();
-        for(File file : (listOfFiles != null ? listOfFiles : new File[]{}))
+        for(File file : (listOfFiles != null ? listOfFiles : new File[]{})){
+            if(!file.getName().endsWith(".txt")) continue;
             englishQuestionList.add(new Question((new BufferedReader(new FileReader(file))).readLine()));
+        }
     }
 
     public static void main(String[] args) throws IOException {
