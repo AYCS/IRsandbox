@@ -16,7 +16,7 @@ public class Question{
     private int id;
     private String title, body;
     private Question[] relatedQuestions;
-    private List<String> titleTokens, bodyTokens;
+    private List<String> titleTokens, allTokens;
 
     public Question(String json){
 
@@ -49,7 +49,7 @@ public class Question{
 
     public void tokenize(){
         this.titleTokens = new ArrayList<String>();
-        this.bodyTokens = new ArrayList<String>();
+        this.allTokens = new ArrayList<String>();
         PTBTokenizer<CoreLabel> tokenizer;
 
         tokenizer = new PTBTokenizer<CoreLabel>
@@ -60,7 +60,9 @@ public class Question{
         tokenizer = new PTBTokenizer<CoreLabel>
                             (new StringReader(this.body), new CoreLabelTokenFactory(), "untokenizable=noneKeep");
         while(tokenizer.hasNext())
-            bodyTokens.add(tokenizer.next().current());
+            allTokens.add(tokenizer.next().current());
+
+        allTokens.addAll(titleTokens);
     }
 
     public int getID(){ return this.id; }
@@ -68,6 +70,6 @@ public class Question{
     public String getBody(){ return this.body; }
     public Question[] getRelatedQuestions(){ return this.relatedQuestions; }
     public List<String> getTitleTokens(){ return this.titleTokens; }
-    public List<String> getBodyTokens(){ return this.bodyTokens; }
+    public List<String> getAllTokens(){ return this.allTokens; }
 
 }
