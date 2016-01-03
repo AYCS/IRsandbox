@@ -1,6 +1,4 @@
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.process.CoreLabelTokenFactory;
-import edu.stanford.nlp.process.PTBTokenizer;
+import com.medallia.word2vec.Word2VecExamples;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -40,6 +38,11 @@ public class QuestionEquivalence {
     }
 
     public static void main(String[] args) throws IOException {
-        QuestionEquivalence qe = new QuestionEquivalence();
+//        QuestionEquivalence qe = new QuestionEquivalence();
+        try {
+            Word2VecExamples.demoWord();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
