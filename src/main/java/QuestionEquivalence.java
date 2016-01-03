@@ -16,13 +16,12 @@ public class QuestionEquivalence {
     private final String ENGLISH_DATA_PATH = TRAINING_DATA_PATH + "English";
 
     private List<Question> askUbuntuQuestionList, englishQuestionList;
-    public QuestionEquivalence() throws IOException {
 
+    public QuestionEquivalence() throws IOException {
         readQuestions();
     }
 
     public void readQuestions() throws IOException {
-
         // Reads questions of 'AskUbuntu'.
         askUbuntuQuestionList = new ArrayList<Question>();
         File[] listOfFiles = (new File(ASKUBUNTU_DATA_PATH)).listFiles();
@@ -37,7 +36,6 @@ public class QuestionEquivalence {
     }
 
     public static void main(String[] args) throws IOException {
-
         QuestionEquivalence qe = new QuestionEquivalence();
     }
 }
