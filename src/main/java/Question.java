@@ -43,8 +43,9 @@ public class Question{
         this.body = this.body.replaceAll("<code>(?s).*?</code>","");
         this.body = this.body.replaceAll("<a href=(?s).*?</a>","LINKOFASITE");
         this.body = this.body.replaceAll("\"http.*?\"","LINKOFASITE");
+        this.body = this.body.replaceAll("<\\S*?>","");
 
-//        tokenize();
+        tokenize();
     }
 
     public void tokenize(){
